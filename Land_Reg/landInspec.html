@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <script src="script.js"></script>
+    <meta charset="UTF-8">
+    <title>Card Layout Example</title>
+    <style>
+      /* Style for the card layout */
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+      
+
+      .card {
+        display: flex;
+        flex-direction: row;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        padding: 10px;
+      }
+      
+      /* Style for the left section */
+      .left-section {
+        flex-basis: 30%;
+        padding-right: 10px;
+      }
+      
+      /* Style for the buttons */
+      .button {
+        display: block;
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #eee;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      /* Style for the active button */
+      .active {
+        background-color: #ddd;
+      }
+      
+      /* Style for the right section */
+      .right-section {
+        flex-basis: 70%;
+      }
+    </style>
+
+    <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="landInspec.css">
+  </head>
+  <body>
+    <div class="navbar">
+      <button class="nav-button active" onclick="window.location.href='main.html'">Home</button>
+      <div>
+        <button class="nav-button" onclick="window.location.href='landInspec.html'">Land Inspector</button>
+        <button class="nav-button" onclick="window.location.href='#'">User</button>
+      </div>
+    </div>
+
+
+
+
+    <div class="card">
+      <div class="left-section">
+        <button class="button" onclick="displayInfo('info1')">Register Land</button>
+        <button class="button" onclick="displayInfo('info2')">View Records</button>
+        <button class="button" onclick="displayInfo('info3')">Transfer Ownership</button>
+      </div>
+
+  
+      <div class="right-section">
+        <div id ="Welcome"  style="display: block;">
+          <h2>Land Inspector Portal</h2>
+        </div> 
+      
+        <div id="info1" style="display: none;">
+          <h1>Land Registry</h1>
+    	    <div class="form-container">
+        	  <h2>Register a Land</h2>
+        	  <form onsubmit="registerLand(); return false;">
+            	<label for="id">ID:</label>
+            	<input type="text" id="id" name="id" required>
+
+            	<label for="name">Name:</label>
+            	<input type="text" id="name" name="name" required>
+
+            	<label for="location">Location:</label>
+            	<input type="text" id="location" name="location" required>
+
+            	<label for="locationURL">Location URL:</label>
+            	<input type="text" id="locationURL" name="locationURL" required>
+
+            	<label for="imageURL">Image URL:</label>
+            	<input type="text" id="imageURL" name="imageURL" required>
+
+            	<label for="propertyDim">Property Dimension:</label>
+            	<input type="text" id="propertyDim" name="propertyDim" required>
+
+            	<button type="submit">Register</button>
+        	  </form>
+    	    </div>
+        </div>
+
+        <div id="info2" style="display: none;">
+          <h2>Get Land by ID</h2>
+          <form onsubmit="getLandByID(); return false;">
+            <label for="landID">Land ID:</label>
+            <input type="text" id="landID" name="landID" required>
+            <button type="submit">Get Land</button>
+          </form>
+          <div id="landsList"></div>
+
+          <h2>All Lands</h2>
+			    <form onsubmit="getAllLands(); return false;">
+				    <button type="submit">Get All Records</button>
+			    </form>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Property Dimension</th>
+                <th>Image URL</th>
+              </tr>
+            </thead>
+            <tbody id="AlllandsList">
+            </tbody>
+          </table>
+
+
+
+
+			    <ul id="AlllandsList"></ul>
+        </div>
+
+
+        <div id="info3" style="display: none;">
+          <h2>Transfer Ownership</h2>
+        	<form onsubmit="transferOwnership(); return false;">
+            	<label for="landIDTransfer">Land ID:</label>
+            	<input type="text" id="landIDTransfer" name="landIDTransfer" required>
+
+            	<label for="newOwner">New Owner:</label>
+            	<input type="text" id="newOwner" name="newOwner" required>
+
+            	<label for="newOwnerName">New Owner Name:</label>
+            	<input type="text" id="newOwnerName" name="newOwnerName" required>
+
+            	<button type="submit">Transfer Ownership</button>
+        	</form>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+    <script>
+      // Function to display information based on which button is clicked
+      function displayInfo(infoId) {
+        // Get all the information divs
+        var infoDivs = document.querySelectorAll('.right-section > div');
+        
+        // Loop through all the information divs and hide them
+        for (var i = 0; i < infoDivs.length; i++) {
+          infoDivs[i].style.display = 'none';
+        }
+        
+        // Show the information div that matches the button clicked
+        document.getElementById(infoId).style.display = 'block';
+        
+        // Add the active class to the button clicked and remove it from the others
+        var buttons = document.querySelectorAll('.button');
+        for (var i = 0; i < buttons.length; i++) {
+          if (buttons[i].id === infoId) {
+            buttons[i].classList.add('active');
+          } else {
+            buttons[i].classList.remove('active');
+          }
+        }
+      }
+    </script>
+   
+  </body>
+</html>

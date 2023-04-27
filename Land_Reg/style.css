@@ -1,0 +1,86 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#heading {
+  background-color: #001f3f;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.form-signin {
+  max-width: 400px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.form-signin input[type="text"] {
+  margin-bottom: 10px;
+  border-radius: 4px;
+  padding: 10px;
+  border: none;
+  background-color: #f2f2f2;
+  width: 100%;
+}
+
+.btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.land-details {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.land-details img {
+  max-width: 100%;
+}
+
+.land-details td {
+  vertical-align: top;
+}
+
